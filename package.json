@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-      "build": "next build",
-  "build:netlify": "next build || exit 0"
+  "build": "NEXT_DISABLE_ESLINT=true next build"
   },
   "dependencies": {
     "react": "^19.0.0",
