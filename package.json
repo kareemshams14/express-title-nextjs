@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postinstall": "npm install tailwindcss postcss autoprefixer"
-  },
+      },
   "dependencies": {
     "next": "15.3.2",
     "react": "^19.0.0",
