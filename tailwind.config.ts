@@ -1,21 +1,20 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-  './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-  './src/**/*.css',
-]
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.css',
+  ], // ✅ Add comma here
   theme: {
     extend: {
       colors: {
         primary: {
-          800: '#0a2540', // Deep navy
-          900: '#051b30', // Darker navy
+          800: '#0a2540',
+          900: '#051b30',
         },
         secondary: {
-          400: '#ffc107', // Gold/yellow
-          500: '#e6af00', // Darker gold
+          400: '#ffc107',
+          500: '#e6af00',
         },
       },
       fontFamily: {
@@ -29,6 +28,6 @@ const config: Config = {
     },
   },
   plugins: [],
-}
+};
 
-export default config
+export default config;
