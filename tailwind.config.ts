@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   content: [
   './src/**/*.{js,ts,jsx,tsx,mdx}',
-  './src/app/globals.css', // ✅ explicitly include your CSS entry point
+  './src/app/globals.css', // ✅ Add this line
 ],
   theme: {
     extend: {
