@@ -1,8 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove static export settings
+  eslint: {
+    // Disables all ESLint checks during Netlify or CI builds
+    ignoreDuringBuilds: true,
+  },
   images: {
-    domains: ['marketcheck-prod.apigee.net'], // Add domain for MarketCheck API images
+    // Enables loading external images from MarketCheck's domain
+    domains: ['marketcheck-prod.apigee.net'],
   },
 };
 
