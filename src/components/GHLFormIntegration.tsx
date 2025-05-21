@@ -2,23 +2,30 @@
 
 import React, { useEffect } from 'react';
 
-export default function GHLFormIntegration() {
+interface VehicleInfo {
+  year: string;
+  make: string;
+  model: string;
+  trim: string;
+  mileage: number;
+  value: number;
+  loanAmount: number;
+  imageUrl: string | null;
+}
+
+export default function GHLFormIntegration({ vehicleInfo }: { vehicleInfo: VehicleInfo | null }) {
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://link.msgsndr.com/js/form_embed.js';
     script.async = true;
-    script.onload = () => {
-      console.log('GHL embed script loaded');
-    };
     document.body.appendChild(script);
-
     return () => {
       document.body.removeChild(script);
     };
   }, []);
 
   return (
-    <div className="min-h-[1800px] w-full bg-gray-100 rounded-md">
+    <div className="min-h-[1800px] w-full">
       <iframe
         src="https://api.leadconnectorhq.com/widget/form/eVmyj74xSDEJe0nRu3Ao"
         style={{
