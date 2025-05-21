@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,9 +50,14 @@ const Navbar = () => {
           <Link href="/contact" className="text-white hover:text-secondary-400 transition-colors">
             Contact
           </Link>
-          <Link href="#" className="text-white hover:text-secondary-400 transition-colors">
+          <a 
+            href="https://3ivsauc4tprqw82xagy4.app.clientclub.net/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-white hover:text-secondary-400 transition-colors"
+          >
             Client Portal
-          </Link>
+          </a>
         </nav>
 
         {/* Apply Now Button */}
@@ -115,13 +119,15 @@ const Navbar = () => {
           >
             Contact
           </Link>
-          <Link 
-            href="#" 
+          <a 
+            href="https://3ivsauc4tprqw82xagy4.app.clientclub.net/" 
+            target="_blank" 
+            rel="noopener noreferrer"
             className="text-white hover:text-secondary-400 transition-colors py-2 border-b border-gray-700"
             onClick={() => setIsMenuOpen(false)}
           >
             Client Portal
-          </Link>
+          </a>
           <Link 
             href="/apply-now" 
             className="bg-secondary-400 hover:bg-secondary-500 text-primary-900 font-bold py-3 px-6 rounded-md transition-colors text-center"
