@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --primary-color: #0a2540;
+  --secondary-color: #ffc107;
+  --text-color: #333;
+  --light-bg: #f5f7fa;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: var(--light-bg);
+}
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold mb-6;
+  }
+  h2 {
+    @apply text-3xl font-bold mb-4;
+  }
+  h3 {
+    @apply text-2xl font-semibold mb-3;
+  }
+  p {
+    @apply mb-4;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-yellow-400 hover:bg-yellow-500 text-primary-900 font-bold py-2 px-6 rounded-md transition-all;
+  }
+  .btn-secondary {
+    @apply bg-primary-800 hover:bg-primary-900 text-white font-bold py-2 px-6 rounded-md transition-all;
+  }
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .section {
+    @apply py-12 md:py-16;
+  }
+}
+
+/* Custom styles for Express Title */
+.hero-section {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 4rem 0;
+}
+
+.process-step {
+  border-left: 4px solid var(--secondary-color);
+  padding-left: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.process-number {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card {
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.testimonial-card {
+  border-radius: 0.5rem;
+  padding: 2rem;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400;
+}
+
+.mobile-menu {
+  @apply fixed inset-0 bg-primary-900 bg-opacity-95 z-50 transform transition-transform duration-300 ease-in-out;
+}
+
+.mobile-menu.hidden {
+  @apply -translate-x-full;
+}
+
+.mobile-menu.visible {
+  @apply translate-x-0;
+}
