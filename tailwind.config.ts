@@ -4,7 +4,7 @@ const config: Config = {
   content: [
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.css',
-  ], // ✅ Add comma here
+  ], //
   theme: {
     extend: {
       colors: {
