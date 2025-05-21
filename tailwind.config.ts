@@ -2,8 +2,9 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  './src/**/*.{js,ts,jsx,tsx,mdx}',
+  './src/app/globals.css', // ✅ explicitly include your CSS entry point
+],
   theme: {
     extend: {
       colors: {
