@@ -180,13 +180,16 @@ export function calculateFallbackVehicleValue(year: string, mileage: number = 0)
   // Apply depreciation based on age
   // Ensure age is not negative if parsedYear is currentYear + 1 (new models)
   const effectiveAge = Math.max(0, age);
-  let calculatedValue = Math.max(baseValue - (effectiveAge * 2000), 5000);
+  // Removed the intermediate floor of 5000 to let the final MINIMUM_FALLBACK_VALUE take precedence
+  let calculatedValue = baseValue - (effectiveAge * 2000);
   
   // Apply additional depreciation based on mileage if available
   if (mileage > 0) {
     // Roughly 10% value reduction per 50,000 miles
     const mileageDepreciation = (mileage / 50000) * 0.1;
-    calculatedValue = calculatedValue * (1 - Math.min(mileageDepreciation, 0.8));
+    // Allow mileage to reduce value more significantly, down to 0 if depreciation is 100% or more.
+    // The final Math.max with MINIMUM_FALLBACK_VALUE will ensure it doesn't go below that.
+    calculatedValue = calculatedValue * Math.max(0, (1 - mileageDepreciation));
   }
   
   return Math.max(Math.round(calculatedValue), MINIMUM_FALLBACK_VALUE);
