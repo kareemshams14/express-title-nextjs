@@ -5,13 +5,9 @@ import Link from 'next/link';
 import { getPostBySlug } from '@/utils/blogUtils'; // Import the new utility function
 import type { BlogPost } from '@/data/blogPosts'; // Import BlogPost type if needed
 
-interface PostPageProps {
-  params: {
-    slug: string;
-  };
-}
+// Removed PostPageProps interface
 
-const BlogPostPage = ({ params }: PostPageProps) => {
+const BlogPostPage = ({ params }: { params: { slug: string } }) => { // Updated component signature
   const post = getPostBySlug(params.slug); // Use the utility function
 
   if (!post) {
