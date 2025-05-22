@@ -14,6 +14,7 @@ interface VehicleInfo {
   value: number;
   loanAmount: number;
   imageUrl: string | null;
+  vin: string; // Added vin property to match VinDecoder's VehicleInfo
 }
 
 export default function ApplyNow() {
