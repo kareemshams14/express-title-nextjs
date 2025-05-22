@@ -1,13 +1,40 @@
 // MarketCheck API utility functions
+
+// Define interfaces for MarketCheck API response
+interface Media {
+  photo_links?: string[];
+}
+
+interface Listing {
+  media?: Media;
+  miles?: number;
+  price?: number;
+  // Potentially other fields, but these are what's currently used or checked.
+}
+
+interface MarketCheckApiResponse {
+  listings?: Listing[];
+  // Potentially other fields, but 'listings' is what's currently used.
+}
+
 interface MarketCheckConfig {
   apiKey: string;
   apiSecret: string;
 }
 
 export const MARKETCHECK_CONFIG: MarketCheckConfig = {
-  apiKey: 'FKuNuPaPLi2RDWHLY7NGuFPnJvx53dS0',
-  apiSecret: '5yxomBGfBvmGpKjJ'
+  apiKey: process.env.MARKETCHECK_API_KEY || '',
+  apiSecret: process.env.MARKETCHECK_API_SECRET || ''
 };
+
+// Early check for API keys
+if (!MARKETCHECK_CONFIG.apiKey || !MARKETCHECK_CONFIG.apiSecret) {
+  console.warn(
+    'MarketCheck API key/secret not configured. Features using MarketCheck may not work.'
+  );
+  // Depending on the application's needs, you might throw an error here in production:
+  // throw new Error('MarketCheck API key/secret not configured.');
+}
 
 interface VehicleDetails {
   year: string;
@@ -57,19 +84,19 @@ export async function getVehicleImageAndPricing(
       throw new Error(`MarketCheck API error: ${response.status}`);
     }
     
-    const data = await response.json();
+    const data: MarketCheckApiResponse = await response.json();
     
     if (!data.listings || data.listings.length === 0) {
       return defaultResponse;
     }
     
     // Find the first listing with an image
-    const listingWithImage = data.listings.find((listing: any) => 
+    const listingWithImage = data.listings.find((listing: Listing) => 
       listing.media && listing.media.photo_links && listing.media.photo_links.length > 0
     );
     
     let imageUrl = null;
-    if (listingWithImage && listingWithImage.media.photo_links.length > 0) {
+    if (listingWithImage && listingWithImage.media && listingWithImage.media.photo_links && listingWithImage.media.photo_links.length > 0) {
       // Get the first image (exterior view)
       imageUrl = listingWithImage.media.photo_links[0];
     }
@@ -79,25 +106,25 @@ export async function getVehicleImageAndPricing(
     
     if (mileage && mileage > 0) {
       // Find listings with similar mileage (±20%)
-      const similarMileageListings = data.listings.filter((listing: any) => {
+      const similarMileageListings = data.listings.filter((listing: Listing) => {
         const listingMiles = listing.miles || 0;
         const lowerBound = mileage * 0.8;
         const upperBound = mileage * 1.2;
-        return listingMiles >= lowerBound && listingMiles <= upperBound && listing.price > 0;
+        return listing.price && listing.price > 0 && listingMiles >= lowerBound && listingMiles <= upperBound;
       });
       
       if (similarMileageListings.length > 0) {
         // Calculate average price from similar mileage listings
         const totalPrice = similarMileageListings.reduce(
-          (sum: number, listing: any) => sum + listing.price, 
+          (sum: number, listing: Listing) => sum + (listing.price || 0), 
           0
         );
         estimatedValue = totalPrice / similarMileageListings.length;
       } else {
         // If no similar mileage listings, use all listings with prices
         const validPrices = data.listings
-          .filter((listing: any) => listing.price && listing.price > 0)
-          .map((listing: any) => listing.price);
+          .filter((listing: Listing) => listing.price && listing.price > 0)
+          .map((listing: Listing) => listing.price as number); // Assert price is number due to filter
         
         if (validPrices.length > 0) {
           estimatedValue = validPrices.reduce(
@@ -109,8 +136,8 @@ export async function getVehicleImageAndPricing(
     } else {
       // Without mileage, just use average price
       const validPrices = data.listings
-        .filter((listing: any) => listing.price && listing.price > 0)
-        .map((listing: any) => listing.price);
+        .filter((listing: Listing) => listing.price && listing.price > 0)
+        .map((listing: Listing) => listing.price as number); // Assert price is number due to filter
       
       if (validPrices.length > 0) {
         estimatedValue = validPrices.reduce(
@@ -134,13 +161,26 @@ export async function getVehicleImageAndPricing(
  * Calculates a fallback vehicle value when MarketCheck API fails
  */
 export function calculateFallbackVehicleValue(year: string, mileage: number = 0): number {
-  // Simple fallback calculation based on year and mileage
   const currentYear = new Date().getFullYear();
-  const age = currentYear - parseInt(year);
+  const parsedYear = parseInt(year, 10);
+  const MINIMUM_YEAR = 1900;
+  const MINIMUM_FALLBACK_VALUE = 1000;
+
+  if (isNaN(parsedYear) || parsedYear > currentYear + 1 || parsedYear < MINIMUM_YEAR) {
+    console.warn(
+      `Invalid year provided to calculateFallbackVehicleValue: ${year}. Returning default minimum fallback.`
+    );
+    return MINIMUM_FALLBACK_VALUE;
+  }
+
+  // Simple fallback calculation based on year and mileage
+  const age = currentYear - parsedYear;
   const baseValue = 30000; // Arbitrary base value
   
   // Apply depreciation based on age
-  let calculatedValue = Math.max(baseValue - (age * 2000), 5000);
+  // Ensure age is not negative if parsedYear is currentYear + 1 (new models)
+  const effectiveAge = Math.max(0, age);
+  let calculatedValue = Math.max(baseValue - (effectiveAge * 2000), 5000);
   
   // Apply additional depreciation based on mileage if available
   if (mileage > 0) {
@@ -149,5 +189,5 @@ export function calculateFallbackVehicleValue(year: string, mileage: number = 0)
     calculatedValue = calculatedValue * (1 - Math.min(mileageDepreciation, 0.8));
   }
   
-  return Math.max(Math.round(calculatedValue), 1000); // Minimum $1000
+  return Math.max(Math.round(calculatedValue), MINIMUM_FALLBACK_VALUE);
 }

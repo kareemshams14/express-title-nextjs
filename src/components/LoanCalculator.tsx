@@ -14,6 +14,8 @@ const LoanCalculator: React.FC<LoanCalculatorProps> = ({
 }) => {
   // Calculate max loan amount (30% of vehicle value)
   const maxLoanAmount = Math.round(vehicleValue * 0.3);
+  const MIN_LOAN_AMOUNT = 500;
+  const isLoanPossible = maxLoanAmount >= MIN_LOAN_AMOUNT;
   
   // Set initial loan amount to either provided value or max loan amount
   const [loanAmount, setLoanAmount] = useState(
@@ -51,10 +53,13 @@ const LoanCalculator: React.FC<LoanCalculatorProps> = ({
     const value = e.target.value.replace(/\D/g, '');
     const numValue = value ? parseInt(value) : 0;
     
-    // Ensure loan amount doesn't exceed max
-    if (numValue <= maxLoanAmount) {
-      setLoanAmount(numValue);
+    let finalNumValue = numValue;
+    if (finalNumValue > 0 && finalNumValue < MIN_LOAN_AMOUNT) {
+      finalNumValue = MIN_LOAN_AMOUNT;
     }
+    // Ensure value does not exceed maxLoanAmount
+    finalNumValue = Math.min(finalNumValue, maxLoanAmount);
+    setLoanAmount(finalNumValue);
   };
 
   // Handle loan term selection
@@ -74,12 +79,13 @@ const LoanCalculator: React.FC<LoanCalculatorProps> = ({
           <input
             type="range"
             id="loan-amount"
-            min="500"
-            max={maxLoanAmount}
+            min={MIN_LOAN_AMOUNT}
+            max={isLoanPossible ? maxLoanAmount : MIN_LOAN_AMOUNT}
             step="100"
             value={loanAmount}
             onChange={handleLoanAmountChange}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+            disabled={!isLoanPossible}
+            className={`w-full h-2 bg-gray-200 rounded-lg appearance-none ${!isLoanPossible ? 'cursor-not-allowed' : 'cursor-pointer'}`}
           />
           <div className="relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">$</span>
@@ -87,13 +93,21 @@ const LoanCalculator: React.FC<LoanCalculatorProps> = ({
               type="text"
               value={loanAmount}
               onChange={handleLoanAmountInput}
-              className="pl-7 w-24 py-2 border rounded-md"
+              disabled={!isLoanPossible}
+              className={`pl-7 w-24 py-2 border rounded-md ${!isLoanPossible ? 'bg-gray-100 cursor-not-allowed' : ''}`}
             />
           </div>
         </div>
-        <p className="text-sm text-gray-600 mt-1">
-          Maximum loan amount: ${maxLoanAmount.toLocaleString()} (30% of vehicle value)
-        </p>
+        {!isLoanPossible && (
+          <p className="text-sm text-red-600 mt-1">
+            Maximum loan amount of ${maxLoanAmount.toLocaleString()} is below the minimum of ${MIN_LOAN_AMOUNT.toLocaleString()}.
+          </p>
+        )}
+        {isLoanPossible && (
+          <p className="text-sm text-gray-600 mt-1">
+            Maximum loan amount: ${maxLoanAmount.toLocaleString()} (30% of vehicle value)
+          </p>
+        )}
       </div>
       
       <div className="mb-6">

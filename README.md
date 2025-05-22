@@ -34,3 +34,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Environment Variables
+
+This application requires certain environment variables to be set to function correctly, particularly for integrating with third-party services.
+
+- `MARKETCHECK_API_KEY`: Your API key for the MarketCheck API.
+- `MARKETCHECK_API_SECRET`: Your API secret for the MarketCheck API.
+
+A `.env.example` file is provided in the root of the project. You should copy this file to `.env` (which is gitignored) and replace the placeholder values with your actual credentials.
+
+For local development, you can create a `.env.local` file and add your environment variables there. Next.js will automatically load these variables.
+
+For production deployments, ensure these environment variables are set in your deployment environment.

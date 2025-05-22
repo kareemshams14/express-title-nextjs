@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
     "postinstall": "npm install tailwindcss postcss autoprefixer"
   },
   "dependencies": {
@@ -13,12 +15,16 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "@vitest/ui": "^3.1.4",
     "autoprefixer": "^10.4.17",
+    "happy-dom": "^17.4.7",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.4.0",
-    "@types/node": "^20.11.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0"
+    "vitest": "^3.1.4"
   }
 }
