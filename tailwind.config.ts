@@ -27,10 +27,6 @@ const config: Config = {
           700: '#374151', // Dark gray (good for text)
           800: '#1f2937', // Very dark gray
           900: '#111827', // Almost black
-        },
-        text: {
-          DEFAULT: '#1f2937', // Default text color (very dark gray)
-          light: '#6b7280',   // Lighter text for secondary info
         }
       },
       fontFamily: {

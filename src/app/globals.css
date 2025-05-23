@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gray-50 text-text-DEFAULT; /* Use new light gray background and default text color */
+  @apply bg-gray-50 text-gray-800; /* Use text-gray-800 directly */
   font-family: theme('fontFamily.sans'); /* Ensure Inter is the default body font */
 }
 
@@ -33,7 +33,7 @@ h1, h2, h3, h4, h5, h6 {
     @apply text-base font-semibold mb-2;
   }
   p {
-    @apply mb-4 text-text-DEFAULT; /* Ensure paragraphs also use the default text color */
+    @apply mb-4 text-gray-800; /* Ensure paragraphs also use the new default text color */
   }
 }
 
