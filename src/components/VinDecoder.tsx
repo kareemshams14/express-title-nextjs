@@ -75,13 +75,7 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
       const userMileage = mileage ? parseInt(mileage) : 0;
       
       // Use our optimized MarketCheck API utility
-      const marketCheckData = await getVehicleImageAndPricing({
-        year,
-        make,
-        model,
-        trim,
-        mileage: userMileage
-      });
+      const marketCheckData = await getVehicleImageAndPricing(vin); // Pass the VIN string directly
       
       let imageUrl = marketCheckData.imageUrl;
       let estimatedValue = marketCheckData.estimatedValue;
