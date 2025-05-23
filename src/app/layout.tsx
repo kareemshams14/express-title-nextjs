@@ -38,6 +38,12 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <script 
+          src="https://widgets.leadconnectorhq.com/loader.js"  
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" 
+          data-widget-id="682d1035c0a2524615ae0965"
+          defer
+        ></script>
       </body>
     </html>
   );
