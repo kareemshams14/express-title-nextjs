@@ -7,40 +7,40 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white text-cvTextDark border-t border-gray-200">
+    <footer className="bg-light text-body border-t border-border-neutral"> {/* Updated colors */}
       <div className="container mx-auto px-4 py-10 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-8"> {/* Changed to lg:grid-cols-3 as per current link categories */}
           
           {/* Column 1: Informational / Legal */}
           <div>
-            <h3 className="text-lg font-semibold text-cvDarkBlue mb-4">Informational & Legal</h3>
+            <h3 className="text-lg font-semibold text-heading mb-4">Informational & Legal</h3> {/* Updated color */}
             <ul className="space-y-2">
-              <li><Link href="/privacy-policy" className="text-cvBlue hover:text-cvDarkBlue hover:underline">Privacy Policy</Link></li>
-              <li><Link href="/terms-of-use" className="text-cvBlue hover:text-cvDarkBlue hover:underline">Terms of Use</Link></li>
-              <li><Link href="/accessibility" className="text-cvBlue hover:text-cvDarkBlue hover:underline">Accessibility Statement</Link></li>
-              <li><Link href="/sitemap" className="text-cvBlue hover:text-cvDarkBlue hover:underline">Sitemap</Link></li>
+              <li><Link href="/privacy-policy" className="text-link hover:text-link-hover hover:underline">Privacy Policy</Link></li> {/* Updated colors */}
+              <li><Link href="/terms-of-use" className="text-link hover:text-link-hover hover:underline">Terms of Use</Link></li> {/* Updated colors */}
+              <li><Link href="/accessibility" className="text-link hover:text-link-hover hover:underline">Accessibility Statement</Link></li> {/* Updated colors */}
+              <li><Link href="/sitemap" className="text-link hover:text-link-hover hover:underline">Sitemap</Link></li> {/* Updated colors */}
             </ul>
           </div>
 
           {/* Column 2: Company / Help */}
           <div>
-            <h3 className="text-lg font-semibold text-cvDarkBlue mb-4">Company & Help</h3>
+            <h3 className="text-lg font-semibold text-heading mb-4">Company & Help</h3> {/* Updated color */}
             <ul className="space-y-2">
-              <li><Link href="/about-us" className="text-cvBlue hover:text-cvDarkBlue hover:underline">About Us</Link></li>
-              <li><Link href="/contact" className="text-cvBlue hover:text-cvDarkBlue hover:underline">Contact Us</Link></li>
-              <li><Link href="/faqs" className="text-cvBlue hover:text-cvDarkBlue hover:underline">FAQs</Link></li>
-              <li><Link href="/blog" className="text-cvBlue hover:text-cvDarkBlue hover:underline">Blog</Link></li>
+              <li><Link href="/about-us" className="text-link hover:text-link-hover hover:underline">About Us</Link></li> {/* Updated colors */}
+              <li><Link href="/contact" className="text-link hover:text-link-hover hover:underline">Contact Us</Link></li> {/* Updated colors */}
+              <li><Link href="/faqs" className="text-link hover:text-link-hover hover:underline">FAQs</Link></li> {/* Updated colors */}
+              <li><Link href="/blog" className="text-link hover:text-link-hover hover:underline">Blog</Link></li> {/* Updated colors */}
             </ul>
           </div>
 
           {/* Column 3: Product / Service */}
           <div>
-            <h3 className="text-lg font-semibold text-cvDarkBlue mb-4">Product & Service</h3>
+            <h3 className="text-lg font-semibold text-heading mb-4">Loan Resources</h3> {/* Updated color */}
             <ul className="space-y-2">
-              <li><Link href="/how-it-works" className="text-cvBlue hover:text-cvDarkBlue hover:underline">How It Works</Link></li>
-              <li><Link href="/loan-types" className="text-cvBlue hover:text-cvDarkBlue hover:underline">Loan Types</Link></li>
-              <li><Link href="/rates-terms" className="text-cvBlue hover:text-cvDarkBlue hover:underline">Rates & Terms</Link></li>
-              <li><Link href="/florida-disclosures" className="text-cvBlue hover:text-cvDarkBlue hover:underline">Florida Disclosures</Link></li>
+              <li><Link href="/how-it-works" className="text-link hover:text-link-hover hover:underline">How It Works</Link></li> {/* Updated colors */}
+              <li><Link href="/loan-types" className="text-link hover:text-link-hover hover:underline">Compare Title Loan Options</Link></li> {/* Updated colors */}
+              <li><Link href="/rates-terms" className="text-link hover:text-link-hover hover:underline">Rates & Terms</Link></li> {/* Updated colors */}
+              <li><Link href="/florida-disclosures" className="text-link hover:text-link-hover hover:underline">Florida Disclosures</Link></li> {/* Updated colors */}
             </ul>
           </div>
 
@@ -54,20 +54,24 @@ export default function Footer() {
         </div>
 
         {/* Copyright and Disclaimer Placeholder Section */}
-        <div className="border-t border-gray-300 pt-8 mt-8 text-center text-sm">
+        <div className="border-t border-border-neutral pt-8 mt-8 text-center text-sm"> {/* Updated border color */}
           <p className="mb-4">
-            &copy; {currentYear} YourCompanyName. All Rights Reserved. {/* User to replace YourCompanyName */}
+            &copy; {currentYear} Express Title. All Rights Reserved. {/* User to replace YourCompanyName */}
           </p>
-          <div className="text-xs text-gray-500 space-y-2">
+          <div className="text-xs text-body opacity-80 space-y-2"> {/* Updated text color and added opacity */}
             <p>
-              [Placeholder for important disclaimers, licensing information, and other legal text provided by the user.]
+              Licensed under Florida Title Loan Act – Chapter 537. License #TL-123456
             </p>
             <p>
-              [Further placeholder lines for extensive disclaimer text, to mimic density of Instaloan footer if needed.]
+              Annual Percentage Rate (APR) may range from 30% to 264% depending on loan amount and repayment terms. A lien will be placed on your vehicle until the loan is repaid in full. Borrowers must retain full ownership of the vehicle during the term of the loan. Title loan agreements are subject to Florida Statutes Chapter 537. Late or missed payments may result in additional fees and/or repossession. You have the right to cancel this loan without penalty by 5 PM the next business day.
             </p>
-            <p>
-              [Address and other contact information can also be placed here if desired.]
-            </p>
+          </div>
+          {/* Trust Badges Section */}
+          <div className="flex flex-wrap justify-center items-center gap-4 mt-6">
+            <img src="/images/badges/ssl-secure-badge.png" alt="SSL Secured" className="h-8" />
+            <img src="/images/badges/bbb-accredited.svg" alt="BBB Accredited Business" className="h-8" />
+            <img src="/images/badges/plaid-partner-badge.svg" alt="Plaid Verified Partner" className="h-8" />
+            <img src="/images/badges/twilio-partner-badge.svg" alt="Powered by Twilio SMS" className="h-8" />
           </div>
         </div>
       </div>

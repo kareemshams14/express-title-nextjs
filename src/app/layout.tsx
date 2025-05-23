@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, PT_Serif } from "next/font/google"; // Added PT_Serif
 import '../app/globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter' }); // Added variable
+const ptSerif = PT_Serif({ // Added PT_Serif configuration
+  subsets: ["latin"], 
+  weight: ['400', '700'], 
+  variable: '--font-pt-serif' 
+});
 
 export const metadata: Metadata = {
   title: "Express Title - Fast Cash with Your Vehicle Title",
@@ -32,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex flex-col min-h-screen`}> {/* Added flex classes for sticky footer */}
+      <body className={`${inter.variable} ${ptSerif.variable} flex flex-col min-h-screen`}> {/* Updated font variables and flex classes */}
         <Navbar />
         <main className="flex-grow"> {/* Added flex-grow to push footer down */}
           {children}

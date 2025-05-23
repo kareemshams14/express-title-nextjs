@@ -1,53 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Old CSS variables removed */
-
-body {
-  @apply bg-white text-cvTextDark;
-  font-family: 'Inter', sans-serif; /* Default font */
-}
+/* Google Font import for Barlow and Inter removed as they are handled by next/font */
 
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-barlow text-cvDarkBlue; /* Default heading color */
-    font-weight: 600; /* Or a suitable weight */
+  body {
+    /* Default font family (Inter) is applied via className on <body> in layout.tsx */
+    /* Default background color is typically white or handled by Tailwind's preflight. */
+    /* Set default text color */
+    color: theme('colors.body'); /* Updated to new semantic color */
   }
-  h1 {
-    @apply text-4xl mb-4 text-cvBlue; 
+
+  h1, h2, h3 {
+    font-family: theme('fontFamily.serif'); /* PT Serif */
+    color: theme('colors.heading');     /* Updated to new semantic color */
+    margin-bottom: theme('spacing.4');     /* mb-4 */
+    font-weight: theme('fontWeight.bold'); /* bold (700 for PT Serif if imported) */
   }
-  h2 {
-    @apply text-3xl mb-3 text-cvBlue;
-  }
-  h3 {
-    @apply text-2xl mb-2;
-  }
-  h4 {
-    @apply text-xl mb-2;
-  }
-  h5 {
-    @apply text-lg mb-1;
-  }
-  h6 {
-    @apply text-base mb-1;
-  }
+
+  /* Removed specific h1, h2, h3, h4, h5, h6 size and color rules. */
+  /* These will be handled by utility classes or more specific component styles. */
+  /* The generic h1,h2,h3 rule above sets the new font and base color. */
+
+  /* Existing p and a styles can be kept or adjusted if needed */
   p {
-    @apply mb-4;
+    @apply mb-4; /* Keep existing paragraph margin or adjust */
   }
   a {
-    @apply text-cvBlue hover:text-cvLightBlue;
+    /* Base link styling - can be overridden by utility classes */
+    @apply text-link hover:text-link-hover; /* Updated to new semantic colors */
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-cvBlue text-cvTextLight hover:bg-cvDarkBlue font-semibold py-2 px-4 rounded shadow;
+    /* Example update, assuming secondary is the main button color */
+    @apply bg-secondary text-light hover:bg-secondary/80 font-semibold py-2 px-4 rounded shadow; 
   }
   .btn-secondary {
-    @apply bg-transparent border border-cvBlue text-cvBlue hover:bg-cvBlue hover:text-cvTextLight font-semibold py-2 px-4 rounded shadow;
+    /* Example update */
+    @apply bg-transparent border border-secondary text-secondary hover:bg-secondary hover:text-light font-semibold py-2 px-4 rounded shadow;
   }
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -64,15 +58,18 @@ body {
 }
 
 .process-step {
-  @apply border-l-4 border-cvAccent pl-6 mb-8; /* Using cvAccent for the border */
+  /* Example update, assuming accent is appropriate for this border */
+  @apply border-l-4 border-accent pl-6 mb-8; 
 }
 
 .process-number {
-  @apply bg-cvAccent text-cvTextLight w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mb-4; /* Using cvAccent */
+  /* Example update, assuming accent is for the number bg and light for text */
+  @apply bg-accent text-light w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mb-4;
 }
 
 .feature-card {
-  @apply rounded-lg p-6 bg-white shadow-lg transition-transform duration-300 ease-in-out hover:translate-y-[-5px]; /* Updated shadow and rounded-lg */
+  /* bg-white can be bg-light if 'light' is defined as #FFFFFF */
+  @apply rounded-lg p-6 bg-light shadow-lg transition-transform duration-300 ease-in-out hover:translate-y-[-5px]; 
 }
 
 /* .feature-card:hover {
@@ -80,9 +77,11 @@ body {
 } */
 
 .testimonial-card {
-  @apply rounded-lg p-8 bg-white shadow-lg mb-6; /* Updated shadow and rounded-lg */
+  /* bg-white can be bg-light */
+  @apply rounded-lg p-8 bg-light shadow-lg mb-6; 
 }
 
 .form-control {
-  @apply w-full px-4 py-2 border border-cvBgMedium rounded-md focus:outline-none focus:ring-2 focus:ring-cvBlue focus:border-cvBlue text-cvTextDark bg-white; /* Confirmed */
+  /* Example update: border-border-neutral, focus:ring-secondary, focus:border-secondary, text-body, bg-light */
+  @apply w-full px-4 py-2 border border-border-neutral rounded-md focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary text-body bg-light;
 }

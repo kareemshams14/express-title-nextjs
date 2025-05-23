@@ -21,7 +21,7 @@ export function calculateAPR(loanAmount: number): number {
   } else if (loanAmount <= 3000) {
     return 24; // 24% APR for loans $2,001-$3,000
   } else {
-    return 24; // 24% APR for loans $3,001+ (never drop below 24%)
+    return 18; // 18% APR for loans $3,001+
   }
 }
 
