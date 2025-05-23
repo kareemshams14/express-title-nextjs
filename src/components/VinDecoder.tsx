@@ -86,7 +86,7 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
       }
 
       // Calculate loan amount (30% of vehicle value)
-      const loanAmount = estimatedValue * 0.3;
+      const loanAmount = (estimatedValue || 0) * 0.3;
 
       // Set the vehicle information
       const vehicleData = {
@@ -95,7 +95,7 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
         model,
         trim,
         mileage: userMileage,
-        value: estimatedValue,
+        value: estimatedValue || 0, // Also ensure value in vehicleData is not null
         loanAmount,
         imageUrl
       };
