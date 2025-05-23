@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import VinDecoder from '@/components/VinDecoder';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -40,7 +39,6 @@ export default function Home() {
 
       {/* ... rest of the sections remain unchanged ... */}
 
-      <Footer />
     </main>
   );
 }
