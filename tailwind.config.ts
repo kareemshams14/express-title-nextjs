@@ -8,30 +8,28 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
+        primary: { // Assuming these are existing, keeping them
           800: '#0a2540',
           900: '#051b30',
         },
-        secondary: {
+        secondary: { // Assuming these are existing, keeping them
           400: '#ffc107',
           500: '#e6af00',
         },
-        gray: {
-          50: '#f9fafb',  // Very light gray (almost white)
-          100: '#f3f4f6', // Light gray
-          200: '#e5e7eb', // Light gray
-          300: '#d1d5db', // Gray
-          400: '#9ca3af', // Gray
-          500: '#6b7280', // Medium gray
-          600: '#4b5563', // Darker gray
-          700: '#374151', // Dark gray (good for text)
-          800: '#1f2937', // Very dark gray
-          900: '#111827', // Almost black
-        }
+        cvBlue: '#00a0e3', // Bright blue
+        cvLightBlue: '#7dd3fc', // Lighter blue for accents or hover
+        cvDarkBlue: '#005f8b',  // Darker blue for text or secondary elements
+        cvBgLight: '#f3f4f6',  // Light gray background
+        cvBgMedium: '#e5e7eb', // Medium gray for cards or sections
+        cvTextDark: '#1f2937',  // Dark gray for primary text
+        cvTextLight: '#f9fafb', // Almost white for text on dark backgrounds
+        cvAccent: '#ff6600',   // Orange accent (use sparingly)
+        cvError: '#dc2626',    // Red for errors
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Barlow', 'sans-serif'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        barlow: ['Barlow', 'sans-serif'], // Add Barlow
+        heading: ['Barlow', 'sans-serif'], // Keep existing heading if it was intended, or it can be removed if barlow is the new heading
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

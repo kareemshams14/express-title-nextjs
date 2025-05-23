@@ -13,7 +13,6 @@ interface VehicleInfo {
   value: number;
   loanAmount: number;
   imageUrl: string | null;
-  vin: string;
 }
 
 interface VinDecoderProps {
@@ -104,8 +103,7 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
         mileage: userMileage,
         value: estimatedValue,
         loanAmount,
-        imageUrl,
-        vin: vin,
+        imageUrl
       };
 
       setVehicleInfo(vehicleData);
@@ -128,14 +126,14 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="bg-white rounded-lg shadow-md p-6"> {/* Card style */}
       <div className="mb-6">
-        <div className="flex border-b border-gray-200">
+        <div className="flex border-b border-cvBgMedium"> {/* Tab container border */}
           <button
             className={`py-2 px-4 font-medium ${
               activeTab === 'vin'
-                ? 'text-blue-600 border-b-2 border-blue-600'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'text-cvBlue border-b-2 border-cvBlue' // Active tab style
+                : 'text-cvDarkBlue hover:text-cvBlue' // Inactive tab style
             }`}
             onClick={() => setActiveTab('vin')}
           >
@@ -144,8 +142,8 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
           <button
             className={`py-2 px-4 font-medium ${
               activeTab === 'details'
-                ? 'text-blue-600 border-b-2 border-blue-600'
-                : 'text-gray-500 hover:text-gray-700'
+                ? 'text-cvBlue border-b-2 border-cvBlue' // Active tab style
+                : 'text-cvDarkBlue hover:text-cvBlue' // Inactive tab style
             }`}
             onClick={() => setActiveTab('details')}
           >
@@ -156,14 +154,14 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
 
       {activeTab === 'vin' && (
         <div>
-          <label htmlFor="vin" className="block text-gray-700 font-medium mb-2">
+          <label htmlFor="vin" className="block text-cvTextDark font-medium mb-2">
             Vehicle Identification Number (VIN)
           </label>
           <div className="flex flex-col md:flex-row gap-2">
             <input
               type="text"
               id="vin"
-              className="form-control flex-grow"
+              className="form-control flex-grow" // Uses updated form-control from globals.css
               placeholder="Enter 17-character VIN"
               value={vin}
               onChange={handleVinChange}
@@ -172,20 +170,20 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
             <input
               type="text"
               id="mileage"
-              className="form-control md:w-1/3"
+              className="form-control md:w-1/3" // Uses updated form-control from globals.css
               placeholder="Mileage (optional)"
               value={mileage}
               onChange={handleMileageChange}
             />
             <button
-              className="bg-primary-800 hover:bg-primary-900 text-white font-bold py-2 px-4 rounded-md"
+              className="bg-cvBlue hover:bg-cvLightBlue text-cvTextLight font-bold py-2 px-4 rounded-md transition-colors" // Button style
               onClick={decodeVin}
               disabled={isLoading}
             >
               {isLoading ? 'Decoding...' : 'Decode VIN'}
             </button>
           </div>
-          <p className="text-sm text-gray-600 mt-2">
+          <p className="text-sm text-cvDarkBlue/80 mt-2"> {/* Helper text style */}
             Found on your vehicle registration, insurance card, or driver's side door jamb
           </p>
         </div>
@@ -193,31 +191,31 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
 
       {activeTab === 'details' && (
         <div>
-          <p>Manual vehicle details entry coming soon</p>
+          <p className="text-cvTextDark">Manual vehicle details entry coming soon</p>
         </div>
       )}
 
-      {error && <div className="mt-4 text-red-600">{error}</div>}
+      {error && <div className="mt-4 text-cvError">{error}</div>} {/* Error text style */}
 
       {vehicleInfo && (
-        <div className="mt-6 p-4 border-l-4 border-yellow-400 bg-gray-50">
-          <h3 className="text-xl font-bold mb-3">Vehicle Information:</h3>
+        <div className="mt-6 p-4 border-l-4 border-cvAccent bg-cvBgLight rounded-r-md"> {/* Vehicle info section style */}
+          <h3 className="text-xl font-bold mb-3 text-cvDarkBlue">Vehicle Information:</h3> {/* Heading inherits from globals.css */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <p className="text-lg font-semibold">
+              <p className="text-lg font-semibold text-cvDarkBlue">
                 {vehicleInfo.year} {vehicleInfo.make} {vehicleInfo.model}
               </p>
-              {vehicleInfo.trim && <p className="text-gray-700">Trim: {vehicleInfo.trim}</p>}
+              {vehicleInfo.trim && <p className="text-cvTextDark">Trim: {vehicleInfo.trim}</p>}
               {vehicleInfo.mileage > 0 && (
-                <p className="text-gray-700">Mileage: {vehicleInfo.mileage.toLocaleString()} miles</p>
+                <p className="text-cvTextDark">Mileage: {vehicleInfo.mileage.toLocaleString()} miles</p>
               )}
               
               <div className="mt-4">
-                <p className="text-gray-700">Estimated Value: <span className="font-semibold">${Math.round(vehicleInfo.value).toLocaleString()}</span></p>
-                <p className="text-gray-700">Max Loan Amount: <span className="font-semibold text-green-600">${Math.round(vehicleInfo.loanAmount).toLocaleString()}</span></p>
+                <p className="text-cvTextDark">Estimated Value: <span className="font-semibold text-cvDarkBlue">${Math.round(vehicleInfo.value).toLocaleString()}</span></p>
+                <p className="text-cvTextDark">Max Loan Amount: <span className="font-semibold text-cvBlue">${Math.round(vehicleInfo.loanAmount).toLocaleString()}</span></p>
               </div>
               
-              <p className="mt-4 text-sm text-gray-600">
+              <p className="mt-4 text-sm text-cvDarkBlue/80">
                 This information will be automatically added to your application.
               </p>
             </div>
@@ -232,8 +230,8 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
                 />
               </div>
             ) : (
-              <div className="flex items-center justify-center h-48 md:h-auto bg-gray-100 rounded-md">
-                <p className="text-gray-500">No image available</p>
+              <div className="flex items-center justify-center h-48 md:h-auto bg-cvBgMedium rounded-md"> {/* Image placeholder style */}
+                <p className="text-cvDarkBlue/60">No image available</p>
               </div>
             )}
           </div>

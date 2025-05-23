@@ -1,47 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --primary-color: #0a2540; /* Will be overridden by new styles or can be removed if not used elsewhere */
+  --secondary-color: #ffc107; /* Will be overridden by new styles or can be removed if not used elsewhere */
+  --text-color: #333; /* Will be overridden by new styles or can be removed if not used elsewhere */
+  --light-bg: #f5f7fa; /* Will be overridden by new styles or can be removed if not used elsewhere */
+}
+
 body {
-  @apply bg-gray-50 text-gray-800; /* Use text-gray-800 directly */
-  font-family: theme('fontFamily.sans'); /* Ensure Inter is the default body font */
+  @apply bg-cvBgLight text-cvTextDark;
+  font-family: 'Inter', sans-serif; /* Default font */
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: theme('fontFamily.heading'); /* Ensure Barlow is default for headings */
-  @apply text-primary-900; /* Default heading color - can be overridden by components */
-}
-
-/* Definitions for heading sizes and margins, can be customized further */
 @layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-barlow text-cvDarkBlue; /* Default heading color */
+    font-weight: 600; /* Or a suitable weight */
+  }
   h1 {
-    @apply text-4xl font-bold mb-6;
+    @apply text-4xl mb-4 text-cvBlue; 
   }
   h2 {
-    @apply text-3xl font-bold mb-4;
+    @apply text-3xl mb-3 text-cvBlue;
   }
   h3 {
-    @apply text-2xl font-semibold mb-3;
+    @apply text-2xl mb-2;
   }
   h4 {
-    @apply text-xl font-semibold mb-2;
+    @apply text-xl mb-2;
   }
   h5 {
-    @apply text-lg font-semibold mb-2;
+    @apply text-lg mb-1;
   }
   h6 {
-    @apply text-base font-semibold mb-2;
+    @apply text-base mb-1;
   }
   p {
-    @apply mb-4 text-gray-800; /* Ensure paragraphs also use the new default text color */
+    @apply mb-4;
   }
-}
-
-/* Removed :root variables as colors are now primarily managed by Tailwind config */
-/* --primary-color, --secondary-color can still be useful if used in JS or specific non-Tailwind CSS */
-:root {
-  --primary-color: #0a2540;
-  --secondary-color: #ffc107;
+  a {
+    @apply text-cvBlue hover:text-cvLightBlue;
+  }
 }
 
 @layer components {
@@ -61,20 +67,20 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Custom styles for Express Title */
 .hero-section {
-  background-color: var(--primary-color); /* Or use bg-primary-900 for consistency */
+  background-color: var(--primary-color);
   color: white;
   padding: 4rem 0;
 }
 
 .process-step {
-  border-left: 4px solid var(--secondary-color); /* Or use border-secondary-400 */
+  border-left: 4px solid var(--secondary-color);
   padding-left: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .process-number {
-  background-color: var(--secondary-color); /* Or use bg-secondary-400 */
-  color: var(--primary-color); /* Or use text-primary-900 */
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -107,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .form-control {
-  @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-400;
+  @apply w-full px-4 py-2 border border-cvBgMedium rounded-md focus:outline-none focus:ring-2 focus:ring-cvBlue focus:border-cvBlue text-cvTextDark bg-white;
 }
 
 .mobile-menu {

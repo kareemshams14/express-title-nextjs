@@ -122,42 +122,42 @@ export default function HowItWorks() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="bg-white rounded-lg p-6 shadow-md">
               <h3 className="text-xl font-bold mb-3">How much can I borrow?</h3>
-              <p className="text-text-DEFAULT">
+              <p className="text-gray-700">
                 Loan amounts are based on your vehicle's value. Generally, you can borrow up to 30% of your vehicle's market value.
               </p>
             </div>
             
             <div className="bg-white rounded-lg p-6 shadow-md">
               <h3 className="text-xl font-bold mb-3">Do I need good credit?</h3>
-              <p className="text-text-DEFAULT">
+              <p className="text-gray-700">
                 No, your loan approval is based on your vehicle's value, not your credit score. We welcome all credit types.
               </p>
             </div>
             
             <div className="bg-white rounded-lg p-6 shadow-md">
               <h3 className="text-xl font-bold mb-3">How long does the process take?</h3>
-              <p className="text-text-DEFAULT">
+              <p className="text-gray-700">
                 The entire process can be completed in as little as 30 minutes, and you can receive your funds the same day.
               </p>
             </div>
             
             <div className="bg-white rounded-lg p-6 shadow-md">
               <h3 className="text-xl font-bold mb-3">Can I keep driving my car?</h3>
-              <p className="text-text-DEFAULT">
+              <p className="text-gray-700">
                 Yes! You keep possession of your vehicle while repaying your loan. We only hold the title as collateral.
               </p>
             </div>
             
             <div className="bg-white rounded-lg p-6 shadow-md">
               <h3 className="text-xl font-bold mb-3">What vehicles do you accept?</h3>
-              <p className="text-text-DEFAULT">
+              <p className="text-gray-700">
                 We accept cars, trucks, SUVs, and motorcycles with clear titles. The vehicle must be in your name and in good working condition.
               </p>
             </div>
             
             <div className="bg-white rounded-lg p-6 shadow-md">
               <h3 className="text-xl font-bold mb-3">What are the repayment terms?</h3>
-              <p className="text-text-DEFAULT">
+              <p className="text-gray-700">
                 Repayment terms vary based on your loan amount and state regulations. Our team will explain all terms clearly before you sign.
               </p>
             </div>

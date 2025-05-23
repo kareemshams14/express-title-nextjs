@@ -9,124 +9,54 @@ export const MARKETCHECK_CONFIG: MarketCheckConfig = {
   apiSecret: '5yxomBGfBvmGpKjJ'
 };
 
-interface VehicleDetails {
-  year: string;
-  make: string;
-  model: string;
-  trim?: string;
-  mileage?: number;
-}
-
 interface MarketCheckResponse {
   imageUrl: string | null;
-  estimatedValue: number;
+  estimatedValue: number | null; // Updated to allow null if API returns null
 }
 
 /**
- * Fetches vehicle image and pricing data from MarketCheck API
- * Optimized for speed by limiting data and using efficient queries
+ * Fetches vehicle image and pricing data from our internal API endpoint.
  */
 export async function getVehicleImageAndPricing(
-  vehicleDetails: VehicleDetails
+  vin: string
 ): Promise<MarketCheckResponse> {
-  const { year, make, model, mileage } = vehicleDetails;
-  const { apiKey } = MARKETCHECK_CONFIG;
+  console.log(`Processing VIN: ${vin}`);
   
   // Default response in case of failure
   const defaultResponse: MarketCheckResponse = {
     imageUrl: null,
-    estimatedValue: 0
+    estimatedValue: 0 // Fallback to 0 if API fails or returns no value
   };
   
   try {
-    // Construct the base URL for MarketCheck API
-    let marketCheckUrl = `https://marketcheck-prod.apigee.net/v2/search/car/active?api_key=${apiKey}&year=${year}&make=${make}&model=${model}`;
+    const internalApiUrl = `/api/marketcheck?vin=${vin}`;
+    console.log(`Calling internal API: ${internalApiUrl}`);
     
-    // Add mileage parameter if available for more accurate pricing
-    if (mileage && mileage > 0) {
-      marketCheckUrl += `&miles=${mileage}`;
-    }
-    
-    // Add parameters to optimize for speed
-    marketCheckUrl += '&rows=5&photo_links=true&include_relevant_links=false';
-    
-    // Make the API request
-    const response = await fetch(marketCheckUrl);
+    // Make the API request to our internal endpoint
+    const response = await fetch(internalApiUrl);
     
     if (!response.ok) {
-      throw new Error(`MarketCheck API error: ${response.status}`);
+      throw new Error(`Internal API error: ${response.status}`);
     }
     
     const data = await response.json();
+    console.log(`Received response from internal API: ${JSON.stringify(data)}`);
     
-    if (!data.listings || data.listings.length === 0) {
-      return defaultResponse;
-    }
-    
-    // Find the first listing with an image
-    const listingWithImage = data.listings.find((listing: any) => 
-      listing.media && listing.media.photo_links && listing.media.photo_links.length > 0
-    );
-    
-    let imageUrl = null;
-    if (listingWithImage && listingWithImage.media.photo_links.length > 0) {
-      // Get the first image (exterior view)
-      imageUrl = listingWithImage.media.photo_links[0];
-    }
-    
-    // Calculate estimated value based on mileage if provided
-    let estimatedValue = 0;
-    
-    if (mileage && mileage > 0) {
-      // Find listings with similar mileage (±20%)
-      const similarMileageListings = data.listings.filter((listing: any) => {
-        const listingMiles = listing.miles || 0;
-        const lowerBound = mileage * 0.8;
-        const upperBound = mileage * 1.2;
-        return listingMiles >= lowerBound && listingMiles <= upperBound && listing.price > 0;
-      });
-      
-      if (similarMileageListings.length > 0) {
-        // Calculate average price from similar mileage listings
-        const totalPrice = similarMileageListings.reduce(
-          (sum: number, listing: any) => sum + listing.price, 
-          0
-        );
-        estimatedValue = totalPrice / similarMileageListings.length;
-      } else {
-        // If no similar mileage listings, use all listings with prices
-        const validPrices = data.listings
-          .filter((listing: any) => listing.price && listing.price > 0)
-          .map((listing: any) => listing.price);
-        
-        if (validPrices.length > 0) {
-          estimatedValue = validPrices.reduce(
-            (sum: number, price: number) => sum + price, 
-            0
-          ) / validPrices.length;
-        }
-      }
-    } else {
-      // Without mileage, just use average price
-      const validPrices = data.listings
-        .filter((listing: any) => listing.price && listing.price > 0)
-        .map((listing: any) => listing.price);
-      
-      if (validPrices.length > 0) {
-        estimatedValue = validPrices.reduce(
-          (sum: number, price: number) => sum + price, 
-          0
-        ) / validPrices.length;
-      }
-    }
-    
+    // Ensure that estimatedValue is a number, defaulting to 0 if null or undefined
+    const estimatedValue = data.estimatedValue !== null && data.estimatedValue !== undefined 
+      ? Number(data.estimatedValue) 
+      : 0;
+
     return {
-      imageUrl,
-      estimatedValue: Math.round(estimatedValue)
+      imageUrl: data.imageUrl,
+      estimatedValue: estimatedValue
     };
   } catch (error) {
-    console.error('Error fetching MarketCheck data:', error);
-    return defaultResponse;
+    console.error('Error fetching data from internal API:', error);
+    // Attempt to use fallback calculation if year can be extracted from VIN or is otherwise available
+    // For now, just returning defaultResponse as vehicle year is not directly available here.
+    // Consider modifying to pass year or enhance VIN decoding for more robust fallback.
+    return defaultResponse; 
   }
 }
 
@@ -134,7 +64,9 @@ export async function getVehicleImageAndPricing(
  * Calculates a fallback vehicle value when MarketCheck API fails
  */
 export function calculateFallbackVehicleValue(year: string, mileage: number = 0): number {
-  // Simple fallback calculation based on year and mileage
+  // This function remains as a fallback, though it's not directly used by the modified 
+  // getVehicleImageAndPricing unless explicitly called by the component using it.
+  // The primary function now relies on the internal API's error handling and default responses.
   const currentYear = new Date().getFullYear();
   const age = currentYear - parseInt(year);
   const baseValue = 30000; // Arbitrary base value
