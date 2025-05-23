@@ -4,18 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --primary-color: #0a2540; /* Will be overridden by new styles or can be removed if not used elsewhere */
-  --secondary-color: #ffc107; /* Will be overridden by new styles or can be removed if not used elsewhere */
-  --text-color: #333; /* Will be overridden by new styles or can be removed if not used elsewhere */
-  --light-bg: #f5f7fa; /* Will be overridden by new styles or can be removed if not used elsewhere */
-}
+/* Old CSS variables removed */
 
 body {
-  @apply bg-cvBgLight text-cvTextDark;
+  @apply bg-white text-cvTextDark;
   font-family: 'Inter', sans-serif; /* Default font */
 }
 
@@ -52,10 +44,10 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply bg-yellow-400 hover:bg-yellow-500 text-primary-900 font-bold py-2 px-6 rounded-md transition-all;
+    @apply bg-cvBlue text-cvTextLight hover:bg-cvDarkBlue font-semibold py-2 px-4 rounded shadow;
   }
   .btn-secondary {
-    @apply bg-primary-800 hover:bg-primary-900 text-white font-bold py-2 px-6 rounded-md transition-all;
+    @apply bg-transparent border border-cvBlue text-cvBlue hover:bg-cvBlue hover:text-cvTextLight font-semibold py-2 px-4 rounded shadow;
   }
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
@@ -67,63 +59,30 @@ body {
 
 /* Custom styles for Express Title */
 .hero-section {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 4rem 0;
+  /* background-color and color properties removed, padding is handled by Tailwind utility on the element */
+  /* Retain any other structural styles if necessary, but for this case, it seems padding was the main one. */
 }
 
 .process-step {
-  border-left: 4px solid var(--secondary-color);
-  padding-left: 1.5rem;
-  margin-bottom: 2rem;
+  @apply border-l-4 border-cvAccent pl-6 mb-8; /* Using cvAccent for the border */
 }
 
 .process-number {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  @apply bg-cvAccent text-cvTextLight w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl mb-4; /* Using cvAccent */
 }
 
 .feature-card {
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  @apply rounded-lg p-6 bg-white shadow-lg transition-transform duration-300 ease-in-out hover:translate-y-[-5px]; /* Updated shadow and rounded-lg */
 }
 
-.feature-card:hover {
-  transform: translateY(-5px);
-}
+/* .feature-card:hover {
+  transform: translateY(-5px); // Handled by Tailwind above
+} */
 
 .testimonial-card {
-  border-radius: 0.5rem;
-  padding: 2rem;
-  background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1.5rem;
+  @apply rounded-lg p-8 bg-white shadow-lg mb-6; /* Updated shadow and rounded-lg */
 }
 
 .form-control {
-  @apply w-full px-4 py-2 border border-cvBgMedium rounded-md focus:outline-none focus:ring-2 focus:ring-cvBlue focus:border-cvBlue text-cvTextDark bg-white;
-}
-
-.mobile-menu {
-  @apply fixed inset-0 bg-primary-900 bg-opacity-95 z-50 transform transition-transform duration-300 ease-in-out;
-}
-
-.mobile-menu.hidden {
-  @apply -translate-x-full;
-}
-
-.mobile-menu.visible {
-  @apply translate-x-0;
+  @apply w-full px-4 py-2 border border-cvBgMedium rounded-md focus:outline-none focus:ring-2 focus:ring-cvBlue focus:border-cvBlue text-cvTextDark bg-white; /* Confirmed */
 }

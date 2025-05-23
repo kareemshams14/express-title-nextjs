@@ -29,32 +29,32 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-cvDarkBlue shadow-md py-2' : 'bg-cvDarkBlue py-4'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 shadow-md ${scrolled ? 'bg-white py-2' : 'bg-white py-4'}`}> {/* Always white background, shadow-md */}
       <div className="container-custom flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-cvTextLight text-2xl font-bold">
+        <Link href="/" className="text-cvDarkBlue text-2xl font-bold"> {/* Changed to cvDarkBlue for visibility on white */}
           Express Title
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link href="/" className="text-cvTextLight hover:text-cvLightBlue transition-colors">
+          <Link href="/" className="text-cvTextDark hover:text-cvBlue transition-colors"> {/* Updated text and hover colors */}
             Home
           </Link>
-          <Link href="/how-it-works" className="text-cvTextLight hover:text-cvLightBlue transition-colors">
+          <Link href="/how-it-works" className="text-cvTextDark hover:text-cvBlue transition-colors"> {/* Updated text and hover colors */}
             How It Works
           </Link>
-          <Link href="/locations" className="text-cvTextLight hover:text-cvLightBlue transition-colors">
+          <Link href="/locations" className="text-cvTextDark hover:text-cvBlue transition-colors"> {/* Updated text and hover colors */}
             Locations
           </Link>
-          <Link href="/contact" className="text-cvTextLight hover:text-cvLightBlue transition-colors">
+          <Link href="/contact" className="text-cvTextDark hover:text-cvBlue transition-colors"> {/* Updated text and hover colors */}
             Contact
           </Link>
           <a 
             href="https://3ivsauc4tprqw82xagy4.app.clientclub.net/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-cvTextLight hover:text-cvLightBlue transition-colors"
+            className="text-cvTextDark hover:text-cvBlue transition-colors" /* Updated text and hover colors */
           >
             Client Portal
           </a>
@@ -63,14 +63,14 @@ const Navbar = () => {
         {/* Apply Now Button */}
         <Link 
           href="/apply-now" 
-          className="hidden md:block bg-cvBlue hover:bg-cvLightBlue text-cvTextLight font-bold py-2 px-6 rounded-md transition-colors"
+          className="hidden md:block bg-cvBlue hover:bg-cvDarkBlue text-cvTextLight font-bold py-2 px-6 rounded-md transition-colors" /* Kept original, hover to cvDarkBlue */
         >
           Apply Now
         </Link>
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-cvTextLight focus:outline-none"
+          className="md:hidden text-cvDarkBlue focus:outline-none" /* Changed to cvDarkBlue for visibility on white */
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -88,33 +88,33 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div 
-        className={`md:hidden bg-cvDarkBlue overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 py-4' : 'max-h-0'}`}
+        className={`md:hidden bg-white overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 py-4 border-t border-gray-200' : 'max-h-0'}`} /* White background, top border */
       >
         <div className="container-custom flex flex-col space-y-4">
           <Link 
             href="/" 
-            className="text-cvTextLight hover:text-cvLightBlue transition-colors py-2 border-b border-cvTextDark/50" // Using cvTextDark with opacity for border
+            className="text-cvTextDark hover:text-cvBlue transition-colors py-2 border-b border-gray-200" /* Updated text, hover, and border colors */
             onClick={() => setIsMenuOpen(false)}
           >
             Home
           </Link>
           <Link 
             href="/how-it-works" 
-            className="text-cvTextLight hover:text-cvLightBlue transition-colors py-2 border-b border-cvTextDark/50"
+            className="text-cvTextDark hover:text-cvBlue transition-colors py-2 border-b border-gray-200" /* Updated text, hover, and border colors */
             onClick={() => setIsMenuOpen(false)}
           >
             How It Works
           </Link>
           <Link 
             href="/locations" 
-            className="text-cvTextLight hover:text-cvLightBlue transition-colors py-2 border-b border-cvTextDark/50"
+            className="text-cvTextDark hover:text-cvBlue transition-colors py-2 border-b border-gray-200" /* Updated text, hover, and border colors */
             onClick={() => setIsMenuOpen(false)}
           >
             Locations
           </Link>
           <Link 
             href="/contact" 
-            className="text-cvTextLight hover:text-cvLightBlue transition-colors py-2 border-b border-cvTextDark/50"
+            className="text-cvTextDark hover:text-cvBlue transition-colors py-2 border-b border-gray-200" /* Updated text, hover, and border colors */
             onClick={() => setIsMenuOpen(false)}
           >
             Contact
@@ -123,14 +123,14 @@ const Navbar = () => {
             href="https://3ivsauc4tprqw82xagy4.app.clientclub.net/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-cvTextLight hover:text-cvLightBlue transition-colors py-2 border-b border-cvTextDark/50"
+            className="text-cvTextDark hover:text-cvBlue transition-colors py-2 border-b border-gray-200" /* Updated text, hover, and border colors */
             onClick={() => setIsMenuOpen(false)}
           >
             Client Portal
           </a>
           <Link 
             href="/apply-now" 
-            className="bg-cvBlue hover:bg-cvLightBlue text-cvTextLight font-bold py-3 px-6 rounded-md transition-colors text-center"
+            className="bg-cvBlue hover:bg-cvDarkBlue text-cvTextLight font-bold py-3 px-6 rounded-md transition-colors text-center" /* Kept original, hover to cvDarkBlue */
             onClick={() => setIsMenuOpen(false)}
           >
             Apply Now

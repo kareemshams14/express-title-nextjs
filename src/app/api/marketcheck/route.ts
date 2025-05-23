@@ -10,18 +10,34 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'VIN is required' }, { status: 400 });
   }
 
-  const apiKey = 'YOUR_MARKETCHECK_API_KEY'; // Replace with your actual API key
-  const marketcheckApiUrl = `https://marketcheck-prod.apigee.net/v2/search/car/active?api_key=${apiKey}&vins=${vin}`;
-
-  console.log(`Constructed Marketcheck API URL: ${marketcheckApiUrl}`);
+  // Environment variable for API key is managed by Netlify, no need to load .env here
+  // Environment variable for API key is managed by Netlify.
+  // The apiKey definition and check will be placed inside the try block as requested.
 
   try {
+    const apiKey = process.env.NEXT_PUBLIC_MARKETCHECK_API_KEY;
+
+    if (!apiKey) {
+      console.error('Marketcheck API key (NEXT_PUBLIC_MARKETCHECK_API_KEY) is not set in environment variables.');
+      return NextResponse.json({ error: 'API key not configured for Marketcheck service.' }, { status: 500 });
+    }
+
+    // The existing line that gets the VIN:
+    // const vin = searchParams.get('vin');
+    // ... (should already be there)
+
+    // The existing line that constructs the marketcheckApiUrl:
+    // const marketcheckApiUrl = `https://marketcheck-prod.apigee.net/v2/search/car/active?api_key=${apiKey}&vins=${vin}`;
+    // Ensure this line uses the `apiKey` defined above. If it's hardcoded, change it.
+    const marketcheckApiUrl = `https://marketcheck-prod.apigee.net/v2/search/car/active?api_key=${apiKey}&vins=${vin}`;
+    console.log(`Constructed Marketcheck API URL: ${marketcheckApiUrl}`); // Ensure this console log is present
+
     const response = await fetch(marketcheckApiUrl);
     const data = await response.json();
 
     console.log(`Raw data from Marketcheck: ${JSON.stringify(data)}`);
 
-    let imageUrl = null;
+    let imageUrl = null; 
     let estimatedValue = null;
 
     if (data.listings && data.listings.length > 0) {
@@ -36,7 +52,8 @@ export async function GET(request: NextRequest) {
         console.log('No listing.price found for estimatedValue.');
       }
       
-      let imageUrl = null;
+      // imageUrl is already defined as let within this scope (shadowing the outer one, which is fine here)
+      // let imageUrl = null; // No need to redefine
 
       // Attempt 1: Direct common fields
       if (listing.image_url) {
