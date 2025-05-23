@@ -16,6 +16,22 @@ const config: Config = {
           400: '#ffc107',
           500: '#e6af00',
         },
+        gray: {
+          50: '#f9fafb',  // Very light gray (almost white)
+          100: '#f3f4f6', // Light gray
+          200: '#e5e7eb', // Light gray
+          300: '#d1d5db', // Gray
+          400: '#9ca3af', // Gray
+          500: '#6b7280', // Medium gray
+          600: '#4b5563', // Darker gray
+          700: '#374151', // Dark gray (good for text)
+          800: '#1f2937', // Very dark gray
+          900: '#111827', // Almost black
+        },
+        text: {
+          DEFAULT: '#1f2937', // Default text color (very dark gray)
+          light: '#6b7280',   // Lighter text for secondary info
+        }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

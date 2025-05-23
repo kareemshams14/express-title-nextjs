@@ -14,6 +14,7 @@ interface VehicleInfo {
   value: number;
   loanAmount: number;
   imageUrl: string | null;
+  vin: string;
 }
 
 export default function ApplyNow() {

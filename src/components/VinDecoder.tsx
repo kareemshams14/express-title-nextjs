@@ -13,6 +13,7 @@ interface VehicleInfo {
   value: number;
   loanAmount: number;
   imageUrl: string | null;
+  vin: string;
 }
 
 interface VinDecoderProps {
@@ -103,7 +104,8 @@ const VinDecoder: React.FC<VinDecoderProps> = ({ onVehicleInfoChange }) => {
         mileage: userMileage,
         value: estimatedValue,
         loanAmount,
-        imageUrl
+        imageUrl,
+        vin: vin,
       };
 
       setVehicleInfo(vehicleData);

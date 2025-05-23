@@ -2,21 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --primary-color: #0a2540;
-  --secondary-color: #ffc107;
-  --text-color: #333;
-  --light-bg: #f5f7fa;
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: var(--light-bg);
+  @apply bg-gray-50 text-text-DEFAULT; /* Use new light gray background and default text color */
+  font-family: theme('fontFamily.sans'); /* Ensure Inter is the default body font */
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: theme('fontFamily.heading'); /* Ensure Barlow is default for headings */
+  @apply text-primary-900; /* Default heading color - can be overridden by components */
+}
+
+/* Definitions for heading sizes and margins, can be customized further */
 @layer base {
   h1 {
     @apply text-4xl font-bold mb-6;
@@ -27,9 +23,25 @@ body {
   h3 {
     @apply text-2xl font-semibold mb-3;
   }
-  p {
-    @apply mb-4;
+  h4 {
+    @apply text-xl font-semibold mb-2;
   }
+  h5 {
+    @apply text-lg font-semibold mb-2;
+  }
+  h6 {
+    @apply text-base font-semibold mb-2;
+  }
+  p {
+    @apply mb-4 text-text-DEFAULT; /* Ensure paragraphs also use the default text color */
+  }
+}
+
+/* Removed :root variables as colors are now primarily managed by Tailwind config */
+/* --primary-color, --secondary-color can still be useful if used in JS or specific non-Tailwind CSS */
+:root {
+  --primary-color: #0a2540;
+  --secondary-color: #ffc107;
 }
 
 @layer components {
@@ -49,20 +61,20 @@ body {
 
 /* Custom styles for Express Title */
 .hero-section {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color); /* Or use bg-primary-900 for consistency */
   color: white;
   padding: 4rem 0;
 }
 
 .process-step {
-  border-left: 4px solid var(--secondary-color);
+  border-left: 4px solid var(--secondary-color); /* Or use border-secondary-400 */
   padding-left: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .process-number {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
+  background-color: var(--secondary-color); /* Or use bg-secondary-400 */
+  color: var(--primary-color); /* Or use text-primary-900 */
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -95,7 +107,7 @@ body {
 }
 
 .form-control {
-  @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400;
+  @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-400;
 }
 
 .mobile-menu {

@@ -50,6 +50,9 @@ const Navbar = () => {
           <Link href="/contact" className="text-white hover:text-secondary-400 transition-colors">
             Contact
           </Link>
+          <Link href="/blog" className="text-white hover:text-secondary-400 transition-colors">
+            Blog
+          </Link>
           <a 
             href="https://3ivsauc4tprqw82xagy4.app.clientclub.net/" 
             target="_blank" 
@@ -118,6 +121,13 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
           >
             Contact
+          </Link>
+          <Link 
+            href="/blog" 
+            className="text-white hover:text-secondary-400 transition-colors py-2 border-b border-gray-700"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Blog
           </Link>
           <a 
             href="https://3ivsauc4tprqw82xagy4.app.clientclub.net/" 
