@@ -54,6 +54,21 @@ body {
   padding: 4rem 0;
 }
 
+/* Utility container for hero image with overlay */
+.hero-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.hero-image-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
 .process-step {
   border-left: 4px solid var(--secondary-color);
   padding-left: 1.5rem;
