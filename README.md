@@ -14,6 +14,15 @@ pnpm dev
 bun dev
 ```
 
+### Environment Variables
+
+Create a `.env.local` file in the project root with the following variables so the MarketCheck API can be used:
+
+```bash
+MARKETCHECK_API_KEY=your-marketcheck-api-key
+MARKETCHECK_API_SECRET=your-marketcheck-api-secret
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
