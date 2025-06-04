@@ -68,7 +68,7 @@ const LoanCalculator: React.FC<LoanCalculatorProps> = ({
       
       <div className="mb-6">
         <label htmlFor="loan-amount" className="block text-gray-700 font-medium mb-2">
-          Desired Loan Amount: ${loanAmount.toLocaleString()}
+          {`Desired Loan Amount: $${loanAmount.toLocaleString()}`}
         </label>
         <div className="flex items-center gap-4">
           <input
@@ -92,7 +92,7 @@ const LoanCalculator: React.FC<LoanCalculatorProps> = ({
           </div>
         </div>
         <p className="text-sm text-gray-600 mt-1">
-          Maximum loan amount: ${maxLoanAmount.toLocaleString()} (30% of vehicle value)
+          {`Maximum loan amount: $${maxLoanAmount.toLocaleString()} (30% of vehicle value)`}
         </p>
       </div>
       
@@ -126,7 +126,7 @@ const LoanCalculator: React.FC<LoanCalculatorProps> = ({
           <div className="bg-white p-3 rounded-md shadow-sm">
             <p className="text-gray-600 text-sm">Total Interest</p>
             <p className="text-2xl font-bold text-blue-700">
-              ${Math.round(calculationResult.totalInterest).toLocaleString()}
+              {`$${Math.round(calculationResult.totalInterest).toLocaleString()}`}
             </p>
             <p className="text-xs text-gray-500">Simple interest</p>
           </div>
@@ -134,7 +134,7 @@ const LoanCalculator: React.FC<LoanCalculatorProps> = ({
           <div className="bg-white p-3 rounded-md shadow-sm">
             <p className="text-gray-600 text-sm">Total Repayment</p>
             <p className="text-2xl font-bold text-green-600">
-              ${Math.round(calculationResult.totalRepayment).toLocaleString()}
+              {`$${Math.round(calculationResult.totalRepayment).toLocaleString()}`}
             </p>
             <p className="text-xs text-gray-500">Principal + Interest</p>
           </div>
