@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function HowItWorks() {
   return (
-    <main className="min-h-screen flex flex-col">
+    <main className="min-h-screen flex flex-col pt-16">
       <Navbar />
       
       {/* Hero Section */}
