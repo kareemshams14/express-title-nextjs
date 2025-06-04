@@ -1,8 +1,6 @@
 'use client';
 
 import React from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import VinDecoder from '@/components/VinDecoder';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,7 +10,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex flex-col">
-      <Navbar />
 
       {/* Hero Section */}
       <section className="hero-section bg-primary-900 text-white">
@@ -39,8 +36,6 @@ export default function Home() {
       </section>
 
       {/* ... rest of the sections remain unchanged ... */}
-
-      <Footer />
     </main>
   );
 }
