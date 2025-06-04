@@ -5,8 +5,8 @@ interface MarketCheckConfig {
 }
 
 export const MARKETCHECK_CONFIG: MarketCheckConfig = {
-  apiKey: 'FKuNuPaPLi2RDWHLY7NGuFPnJvx53dS0',
-  apiSecret: '5yxomBGfBvmGpKjJ'
+  apiKey: process.env.MARKETCHECK_API_KEY || '',
+  apiSecret: process.env.MARKETCHECK_API_SECRET || ''
 };
 
 interface VehicleDetails {
