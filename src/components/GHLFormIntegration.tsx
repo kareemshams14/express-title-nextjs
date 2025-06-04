@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
+import Script from 'next/script';
 
 interface VehicleInfo {
   year: string;
@@ -14,18 +15,10 @@ interface VehicleInfo {
 }
 
 export default function GHLFormIntegration({ vehicleInfo }: { vehicleInfo: VehicleInfo | null }) {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://link.msgsndr.com/js/form_embed.js';
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
 
   return (
     <div className="min-h-[1800px] w-full">
+      <Script src="https://link.msgsndr.com/js/form_embed.js" />
       <iframe
         src="https://api.leadconnectorhq.com/widget/form/eVmyj74xSDEJe0nRu3Ao"
         style={{
