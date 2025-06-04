@@ -11,7 +11,7 @@ export default function Home() {
   const [vehicleInfo, setVehicleInfo] = React.useState<any>(null);
 
   return (
-    <main className="min-h-screen flex flex-col">
+    <main className="min-h-screen flex flex-col pt-16">
       <Navbar />
 
       {/* Hero Section */}
