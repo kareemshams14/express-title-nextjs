@@ -1,13 +1,10 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Contact() {
   return (
     <main className="min-h-screen flex flex-col">
-      <Navbar />
       
       {/* Hero Section */}
       <section className="bg-primary-900 text-white py-12">
@@ -236,7 +233,6 @@ export default function Contact() {
         </div>
       </section>
       
-      <Footer />
     </main>
   );
 }
