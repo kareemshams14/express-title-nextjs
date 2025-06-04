@@ -25,13 +25,13 @@ export default function Home() {
                 See What You Qualify For
               </Link>
             </div>
-            <div className="relative h-64 md:h-auto">
-              <Image 
-                src="/images/hero-image-new.png" 
-                alt="Hero image showing woman next to car representing Express Title" 
+            <div className="hero-image-container h-64 md:h-auto">
+              <Image
+                src="/images/hero-image-new.png"
+                alt="Hero image showing woman next to car representing Express Title"
                 width={600}
                 height={400}
-                className="rounded-lg shadow-lg"
+                className="rounded-lg shadow-lg object-cover brightness-75"
               />
             </div>
           </div>
